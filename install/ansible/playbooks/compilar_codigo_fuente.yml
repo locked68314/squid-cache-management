@@ -15,11 +15,12 @@
       ansible.builtin.unarchive:
         src: "/tmp/squid.tar.gz"
         dest: "/tmp/"
-        remote_src: true
         mode: "0644"
+        remote_src: true
+        list_files: true
       register: result_file
 
     - name: Ejecutar ./configure con flags definidos
       ansible.builtin.command: ./configure {{ squid_configure_flags | join(' ') }}
       args:
-        chdir: "{{ result_file.files | first }}"
+        chdir: "{{ result_file.get('files') | first }}"

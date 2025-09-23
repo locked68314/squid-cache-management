@@ -53,4 +53,16 @@
         shell: /usr/sbin/nologin
         system: yes
         state: present
+    
+    - name: Crear directorios necesarios para Squid
+      ansible.builtin.file:
+        path: "{{ item  }}"
+        state: directory
+        owner: proxy
+        group: proxy
+        mode: '0644'
+      loop:
+        - /var/spool/squid
+        - /var/log/squid
+        - /var/cache/squid
       

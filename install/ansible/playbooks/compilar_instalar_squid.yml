@@ -1,6 +1,6 @@
 ---
-- name: Preparacion inicial
-  hosts: all
+- name: Preparación inicial
+  hosts: squid_compile
   become: yes
 
   tasks:

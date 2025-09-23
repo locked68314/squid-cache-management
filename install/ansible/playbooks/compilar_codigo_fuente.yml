@@ -14,6 +14,8 @@
         src: "/tmp/squid.tar.gz"
         dest: "/tmp/"
         mode: "0644"
+        owner: root
+        group: root
         remote_src: true
         list_files: true
       register: result_file

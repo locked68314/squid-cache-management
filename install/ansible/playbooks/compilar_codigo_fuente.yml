@@ -20,6 +20,11 @@
         list_files: true
       register: result_file
 
+    - name: Dar permisos de ejecución a scripts necesarios
+      ansible.builtin.file:
+        path: "/tmp/{{ result_file.get('files') | first }}/configure"
+        mode: "0744"
+
     - name: Ejecutar ./configure con flags definidos
       ansible.builtin.command: ./configure {{ squid_configure_flags | join(' ') }}
       args:

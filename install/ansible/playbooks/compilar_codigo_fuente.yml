@@ -29,3 +29,13 @@
       ansible.builtin.command: ./configure {{ squid_configure_flags | join(' ') }}
       args:
         chdir: "/tmp/{{ result_file.get('files') | first }}"
+    
+    - name: Compilar
+      ansible.builtin.command: make -j 4
+      args:
+        chdir: "/tmp/{{ result_file.get('files') | first }}"
+    
+    - name: Instalar
+      ansible.builtin.command: make install
+      args:
+        chdir: "/tmp/{{ result_file.get('files') | first }}"

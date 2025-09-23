@@ -2,16 +2,19 @@
 - name: Compilar código fuente
   hosts: squid_compile
   become: true
+  environment:
+    http_proxy: http://hdaintegral:hdaintegral@10.12.0.205:3128
+    https_proxy: http://hdaintegral:hdaintegral@10.12.0.205:3128
   tasks:
-    - name: Descargar código fuente de Squid
+    - name: Extraer ficheros
       ansible.builtin.unarchive:
-        src: "https://www.squid-cache.org/Versions/v7/squid-7.0.0-20250103-rb56774dd09.tar.gz"
-        dest: "/tmp/squid"
+        src: "/tmp/squid.tar.gz"
+        dest: "/tmp/"
         remote_src: true
         mode: "0644"
       register: result_file
-      
+
     - name: Ejecutar ./configure con flags definidos
       ansible.builtin.command: ./configure {{ squid_configure_flags | join(' ') }}
       args:
-        chdir: {{ result_file.files | first }}
+        chdir: "{{ result_file.files | first }}"

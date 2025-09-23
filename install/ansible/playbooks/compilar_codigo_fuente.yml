@@ -2,9 +2,7 @@
 - name: Compilar código fuente
   hosts: squid_compile
   become: true
-  environment:
-    http_proxy: http://hdaintegral:hdaintegral@10.12.0.205:3128
-    https_proxy: http://hdaintegral:hdaintegral@10.12.0.205:3128
+
   tasks:
     - name: Descargar código fuente
       ansible.builtin.get_url:

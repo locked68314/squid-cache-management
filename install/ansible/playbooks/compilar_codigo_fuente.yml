@@ -21,4 +21,4 @@
     - name: Ejecutar ./configure con flags definidos
       ansible.builtin.command: ./configure {{ squid_configure_flags | join(' ') }}
       args:
-        chdir: "{{ result_file.get('files') | first }}"
+        chdir: "/tmp/{{ result_file.get('files') | first }}"

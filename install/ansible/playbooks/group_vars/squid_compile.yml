@@ -52,3 +52,4 @@ squid_configure_flags:
   - --with-pthreads
   - --enable-arp
   - --enable-arp-acl
+src_path: "/tmp/squid"

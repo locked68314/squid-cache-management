@@ -56,7 +56,7 @@
     
     - name: Crear directorios necesarios para Squid
       ansible.builtin.file:
-        path: "{{ item  }}"
+        path: "{{ item }}"
         state: directory
         owner: proxy
         group: proxy

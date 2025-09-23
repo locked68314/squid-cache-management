@@ -1,0 +1,46 @@
+---
+- name: Preparacion inicial
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Instalar dependencias necesarias
+      apt:
+        name:
+          - logrotate
+          - acl
+          - attr
+          - autoconf
+          - bison
+          - nettle-dev
+          - build-essential
+          - libacl1-dev
+          - libaio-dev
+          - libattr1-dev
+          - libblkid-dev
+          - libbsd-dev
+          - libcap2-dev
+          - libcppunit-dev
+          - libldap2-dev
+          - pkg-config
+          - libxml2-dev
+          - libdb-dev
+          - libgnutls28-dev
+          - openssl
+          - devscripts
+          - fakeroot
+          - libdbi-perl
+          - libssl-dev
+          - libcppunit-dev
+          - libecap3-dev
+          - libkrb5-dev
+          - comerr-dev
+          - libnetfilter-conntrack-dev
+          - libpam0g-dev
+          - libsasl2-dev
+          - krb5-user
+          - msktutil
+          - libsasl2-modules-gssapi-mit
+          - libtdb-dev
+        state: present
+        update_cache: yes

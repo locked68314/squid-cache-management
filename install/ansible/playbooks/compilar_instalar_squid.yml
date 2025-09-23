@@ -73,13 +73,3 @@
         remote_src: true
         mode: "0644"
       register: result_file
-
-- name: Compilar Squid
-  hosts: squid_compile
-  become: true
-
-  tasks:
-    - name: Ejecutar ./configure con flags definidos
-      ansible.builtin.command: ./configure {{ squid_configure_flags | join(' ') }}
-      args:
-        chdir: {{ result_file.files | first }}

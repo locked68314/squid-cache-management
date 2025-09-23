@@ -5,7 +5,7 @@
 
   tasks:
     - name: Instalar dependencias necesarias
-      apt:
+      ansible.builtin.apt:
         name:
           - logrotate
           - acl
@@ -46,7 +46,7 @@
         update_cache: yes
 
     - name: Crear usuario y grupo para Squid
-      user:
+      ansible.builtin.user:
         name: proxy
         group: proxy
         create_home: no

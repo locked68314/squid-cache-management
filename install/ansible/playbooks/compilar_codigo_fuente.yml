@@ -2,11 +2,10 @@
 - name: Compilar código fuente
   hosts: squid_compile
   become: true
-
   tasks:
     - name: Descargar código fuente
       ansible.builtin.get_url:
-        url: "https://www.squid-cache.org/Versions/v7/squid-7.0.0-20250103-rb56774dd09.tar.gz"
+        url: "https://www.squid-cache.org/Versions/v6/squid-6.12.tar.gz"
         dest: "/tmp/squid.tar.gz"
       
     - name: Extraer ficheros

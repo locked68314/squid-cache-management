@@ -42,7 +42,7 @@
     - name: Copiar fichero systemd
       ansible.builtin.copy:
         src: "tool/systemd/squid.service"
-        dst: /etc/systemd/system/squid.service
+        dest: /etc/systemd/system/squid.service
         remote_src: true
       args:
         chdir: "/tmp/{{ result_file.get('files') | first }}"

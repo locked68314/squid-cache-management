@@ -2,7 +2,6 @@
 - name: Preparación inicial
   hosts: squid_compile
   become: yes
-
   tasks:
     - name: Instalar dependencias necesarias
       ansible.builtin.apt:

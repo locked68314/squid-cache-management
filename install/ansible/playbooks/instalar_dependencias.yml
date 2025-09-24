@@ -59,7 +59,7 @@
         state: directory
         owner: proxy
         group: proxy
-        mode: '0644'
+        mode: '0764'
       loop:
         - /var/spool/squid
         - /var/log/squid

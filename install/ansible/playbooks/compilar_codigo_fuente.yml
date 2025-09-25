@@ -56,3 +56,9 @@
       ansible.builtin.copy:
         src: "10-override.conf"
         dest: /etc/systemd/system/squid.service.d/10-override.conf
+
+    - name: Crear servicio squid
+      ansible.builtin.systemd_service:
+        name: squid
+        enabled: yes
+        state: "started"

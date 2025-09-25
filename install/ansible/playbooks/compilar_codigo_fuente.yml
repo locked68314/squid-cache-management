@@ -6,7 +6,7 @@
   tasks:
     - name: Descargar código fuente
       ansible.builtin.get_url:
-        url: "https://www.squid-cache.org/Versions/v6/squid-6.12.tar.gz"
+        url: "https://github.com/squid-cache/squid/releases/download/SQUID_6_12/squid-6.12.tar.gz"
         dest: "/tmp/squid.tar.gz"
       
     - name: Extraer ficheros

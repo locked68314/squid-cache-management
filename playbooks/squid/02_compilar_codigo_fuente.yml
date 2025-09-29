@@ -2,11 +2,10 @@
 - name: Compilar código fuente
   hosts: squid_compile
   become: true
-
   tasks:
     - name: Descargar código fuente
       ansible.builtin.get_url:
-        url: "https://github.com/squid-cache/squid/releases/download/SQUID_6_12/squid-6.12.tar.gz"
+        url: "{{ src_url }}"
         dest: "/tmp/squid.tar.gz"
       
     - name: Extraer ficheros
@@ -19,30 +18,34 @@
         remote_src: true
         list_files: true
       register: result_file
+    
+    - name: Definir variable de directorio de código fuente
+      set_fact:
+        build_dir_path: "/tmp/{{ result_file.get('files') | first }}"
 
     - name: Dar permisos de ejecución a scripts necesarios
       ansible.builtin.file:
-        path: "/tmp/{{ result_file.get('files') | first }}/configure"
+        path: "{{ build_dir_path }}/configure"
         mode: "0744"
 
     - name: Ejecutar ./configure con flags definidos
       ansible.builtin.command: ./configure {{ squid_configure_flags | join(' ') }}
       args:
-        chdir: "/tmp/{{ result_file.get('files') | first }}"
+        chdir: "{{ build_dir_path }}"
     
     - name: Compilar
-      ansible.builtin.command: make -j 4
+      ansible.builtin.command: "make -j {{ compilation_process_number }}"
       args:
-        chdir: "/tmp/{{ result_file.get('files') | first }}"
+        chdir: "{{ build_dir_path }}"
     
     - name: Instalar
       ansible.builtin.command: make install
       args:
-        chdir: "/tmp/{{ result_file.get('files') | first }}"
+        chdir: "{{ build_dir_path }}"
     
     - name: Crear servicio en systemd para squid
       ansible.builtin.copy:
-        src: "/tmp/{{ result_file.get('files') | first }}/tools/systemd/squid.service"
+        src: "{{ build_dir_path }}/tools/systemd/squid.service"
         dest: "/etc/systemd/system/squid.service"
         remote_src: true
     
